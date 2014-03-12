@@ -10,10 +10,8 @@ end
 
 post '/article' do
   article = params['title_name'],params['url_name'],params['article_name']
-
-  CSV.open('input_article.csv', 'a+') do |file|
-    file.puts(article)
-  end
+  @articles = WizardArticle.new(article)
+  @articles.csv_write('input_article.csv')
 
   redirect '/'
 end

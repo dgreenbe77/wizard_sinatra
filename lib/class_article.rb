@@ -12,8 +12,13 @@ class WizardArticle
      if row.include?(params)
        return row[number]
      end
-   end
- end
+    end
+  end
 
+  def csv_write(file)
+    CSV.open(file, 'a+') do |file|
+      file.puts(@params)
+    end
+  end
 
 end
