@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang='en'>
+  <head>
+    <title>SickNasté Wizaads</title>
+    <link rel="stylesheet" href="home.css">
+  </head>
+
+  <body>
+<h1> SickNasté Wizaads</h1>
+
+    <form action="/article" method="post">
+      <label for = "title">Title:</label>
+      <input type = "text" id = "title" name = "title_name" maxlength = "50"/>
+      <br>
+      <label for = "url">URL Name:</label>
+      <input type = "text" id = "url" name = "url_name" maxlength = "25"/>
+      <br>
+      <label for = "article">Write Article:</label>
+      <textarea id = "article" name = "article_name" maxlength = "250" rows="15">
+      </textarea>
+      <br>
+      <input type = "submit"/>
+    </form>
+
+    <% @articles.each do |article| %>
+    <a href="/<%=article[1] %>"><%= article[0] %> </a>
+    <%end%>
+
+
+
+
+
+  </body>
+
+</html>
