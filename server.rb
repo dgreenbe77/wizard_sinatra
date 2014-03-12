@@ -1,8 +1,10 @@
 require 'sinatra'
 require 'csv'
 require 'pry'
+require_relative 'lib/class_article'
+
 get '/' do
-  @articles = CSV.readlines('input_article.csv')
+  @links = CSV.readlines('input_article.csv')
   erb :index
 end
 
@@ -12,21 +14,14 @@ post '/article' do
   CSV.open('input_article.csv', 'a+') do |file|
     file.puts(article)
   end
+
   redirect '/'
 end
 
 
 get '/:url_name' do
-  @articles = CSV.readlines('input_article.csv')
-  @articles.each do |array|
-    if array.include?(params[:url_name])
-      @current_title = array[0]
-      @current_article = array[2]
-    end
-  end
-
-
-
+  @articles = WizardArticle.new(params[:url_name])
+  @links = CSV.readlines('input_article.csv')
 
   erb :article
 end

@@ -1,24 +1,20 @@
 <!doctype html>
 <html lang='en'>
-  <head>
-    <title>WizArticlzz</title>
-    <link rel="stylesheet" href="home.css">
-  </head>
+<head>
+  <title>WizArticlzz</title>
+  <link rel="stylesheet" href="home.css">
+</head>
 
+<body>
 
-  <body>
-<h1> <%= @current_title %> </h1>
-<h2> <%= @current_article %></h2>
+  <h1> <%= @articles.title %> </h1>
+  <h3> <%= @articles.article %></h3>
 
+  <div><a href="/">Home</a></div>
+  <% @links.each do |article| %>
+    <div><a href="/<%=article[1] %>"><%= article[0] %> </a></div>
+  <%end%>
 
-    <% @articles.each do |article| %>
-    <a href="/<%=article[1] %>"><%= article[0] %> </a>
-    <%end%>
-
-
-
-
-
-  </body>
+</body>
 
 </html>
