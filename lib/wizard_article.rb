@@ -6,11 +6,10 @@ require 'csv'
 class WizardArticle
   attr_reader :title, :content, :url
 
-  def initialize(title, url, content)
-    @title = title
-    @url = url
-    @content = content
-    @params = [@title, @url, @content]
+  def initialize(params)
+    @title = params['title']
+    @url = params['url']
+    @content = params['content']
   end
 
   def self.select_specific_article(url, file_name)
@@ -18,8 +17,14 @@ class WizardArticle
   end
 
   def csv_write(file_name)
-    CSV.open(file_name, 'a+') do |file|
-      file.puts(@params)
+    if !FileTest.exists?(file_name)
+      CSV.open(file_name, 'a+', write_headers: true, headers: ["title","content","url"]) do |file|
+        file.puts([title[@title], content[@content], url[@url]])
+      end
+    else
+      CSV.open(file_name, 'a+') do |file|
+        file.puts([title[@title], content[@content], url[@url]])
+      end
     end
   end
 

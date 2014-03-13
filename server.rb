@@ -12,15 +12,15 @@ end
 
 post '/article' do
   # WizardArticle.create(params)
-  @article = WizardArticle.new(params['title_name'],params['url_name'],params['article_name'])
+  @article = WizardArticle.new(params)
   @article.csv_write('input_article.csv')
 
   redirect '/'
 end
 
 
-get '/:url_name' do
-  @article = WizardArticle.select_specific_article(params[:url_name], 'input_article.csv')
+get '/:url' do
+  @article = WizardArticle.select_specific_article(params[:url], 'input_article.csv')
   @articles = LoadFile.file_load('input_article.csv')
 
   erb :article

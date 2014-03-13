@@ -7,8 +7,8 @@ class LoadFile
 
   def self.file_load(file_name)
     articles = []
-    CSV.foreach(file_name, headers: false) do |row|
-      articles << WizardArticle.new(row[0], row[1], row[2])
+    CSV.foreach(file_name, headers: true) do |row|
+      articles << WizardArticle.new(row.to_hash)
     end
     articles
   end
