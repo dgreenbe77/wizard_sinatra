@@ -1,25 +1,27 @@
 require 'sinatra'
 require 'csv'
 require 'pry'
-require_relative 'lib/class_article'
+require_relative 'lib/wizard_article'
+require_relative 'lib/load_file'
+require_relative 'lib/select_article'
 
 get '/' do
-  @links = CSV.readlines('input_article.csv')
+  @articles = LoadFile.file_load('input_article.csv')
   erb :index
 end
 
 post '/article' do
-  article = params['title_name'],params['url_name'],params['article_name']
-  @articles = WizardArticle.new(article)
-  @articles.csv_write('input_article.csv')
+  # WizardArticle.create(params)
+  @article = WizardArticle.new(params['title_name'],params['url_name'],params['article_name'])
+  @article.csv_write('input_article.csv')
 
   redirect '/'
 end
 
 
 get '/:url_name' do
-  @articles = WizardArticle.new(params[:url_name])
-  @links = CSV.readlines('input_article.csv')
+  @article = WizardArticle.select_specific_article(params[:url_name], 'input_article.csv')
+  @articles = LoadFile.file_load('input_article.csv')
 
   erb :article
 end

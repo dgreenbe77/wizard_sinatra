@@ -7,12 +7,12 @@
 
 <body>
 
-  <h1> <%= @articles.title %> </h1>
-  <h3> <%= @articles.article %></h3>
+  <h1> <%= @article.title %> </h1>
+  <h3> <%= @article.content %></h3>
 
   <div><a href="/">Home</a></div>
-  <% @links.each do |article| %>
-    <div><a href="/<%=article[1] %>"><%= article[0] %> </a></div>
+  <% @articles.each do |article| %>
+    <div><a href="/<%=article.url %>"><%= article.title %> </a></div>
   <%end%>
 
 </body>
